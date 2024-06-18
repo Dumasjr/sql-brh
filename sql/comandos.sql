@@ -32,3 +32,49 @@ select * from dependente where colaborador='A124'
 ------8 - insert ------- 
 
 commit 
+
+
+---relatórios--Departamentos--
+
+select sigla, nome from departamento  order by nome
+
+---relatórios--Dependentes--
+
+select c.nome as Colaborador, d.nome as Dependente, d.data_nascimento as Data_Nascimento, d.parentesco from colaborador c
+inner join dependente d on c.matricula=d.colaborador
+order by d.nome
+
+---Excluir--Departamento SECAP--
+
+select c.departamento,c.nome as Colaborador, d.nome as Dependente, d.data_nascimento as Data_Nascimento, d.parentesco from colaborador c
+inner join dependente d on c.matricula=d.colaborador
+where c.departamento='SECAP'
+order by d.nome
+
+--select matricula from colaborador where departamento='SECAP'
+
+select * from dependente where colaborador in (select matricula from colaborador where departamento='SECAP')
+
+
+---Excluir Dependente do Colaborador
+delete dependente where colaborador in (select matricula from colaborador where departamento='SECAP')
+
+
+-------Excluir Telefone e email do Colaborador
+
+--select * from telefone_colaborador where colaborador in (select matricula from colaborador where departamento='SECAP')
+delete telefone_colaborador where colaborador in (select matricula from colaborador where departamento='SECAP')
+
+--select * from email_colaborador where colaborador in (select matricula from colaborador where departamento='SECAP')
+delete email_colaborador where colaborador in (select matricula from colaborador where departamento='SECAP')
+
+-----deletar colaborador----
+--select * from  colaborador where departamento='SECAP'
+
+delete  colaborador where departamento='SECAP'
+
+------deletar departamento---------
+select * from departamento where sigla='SECAP'
+delete from departamento where sigla='SECAP'
+
+commit
