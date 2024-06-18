@@ -86,3 +86,25 @@ select c.nome NOME, tc.numero TELEFONE,ec.email EMAIL
  inner join telefone_colaborador tc on c.matricula=tc.colaborador
  inner join email_colaborador ec on c.matricula=ec.colaborador
 order by c.nome
+
+
+------Relatório Desafio --------------
+
+
+SELECT 
+p.nome NOME_PROJETO,
+pe.nome NOME_PAPEL,
+c.nome NOME_COLABORADOR,
+de.nome NOME_DEPENDENTE,
+d.nome NOME_DEPARTAMENTO,
+d.chefe CHEFE_DEPARTAMENTO,
+tc.numero TELEFONE_COLABORADOR
+
+FROM atribuicao a 
+inner join colaborador c on a.colaborador=c.matricula
+inner join departamento d on c.matricula=d.chefe
+inner join telefone_colaborador tc on c.matricula=tc.colaborador
+inner join dependente de on c.matricula=de.colaborador
+inner join projeto p on a.projeto=p.id 
+inner join papel pe on a.papel=pe.id
+order by p.nome ,c.nome ,de.nome 
