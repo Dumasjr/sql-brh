@@ -78,3 +78,11 @@ select * from departamento where sigla='SECAP'
 delete from departamento where sigla='SECAP'
 
 commit
+
+------relatório colaborador e contatos
+
+select c.nome NOME, tc.numero TELEFONE,ec.email EMAIL
+ from colaborador c 
+ inner join telefone_colaborador tc on c.matricula=tc.colaborador
+ inner join email_colaborador ec on c.matricula=ec.colaborador
+
