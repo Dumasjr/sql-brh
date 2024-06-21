@@ -40,7 +40,8 @@ order by d.nome,p.nome
 ---Tarefa 5-lISTAR COLABORADOR COM MAIS DEPENDENTE--
   
 select c.nome COLABORADOR,count(d.colaborador)as QUANTIDADE_DEPENDENTE 
-from colaborador c
+from COLABORADOR c
+INNER JOIN DEPENDENTE D ON C.MATRICULA=D.COLABORADOR
 group by c.nome,d.colaborador
 having count(d.colaborador) > 1
 order by QUANTIDADE_DEPENDENTE desc ,c.nome asc 
