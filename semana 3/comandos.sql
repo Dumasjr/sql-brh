@@ -49,18 +49,16 @@ order by QUANTIDADE_DEPENDENTE desc ,c.nome asc
 
 ---Tarefa 6- Listar faixa etaria dos dependentes--
 
-
 SELECT 
 d.cpf,
 d.nome DEPENDENTE,
-d.data_nascimento DATA_NASCIMENTO,
+to_char(d.data_nascimento,'dd/mm/yyyy') DATA_NASCIMENTO,
 d.parentesco,
 d.colaborador Matricula_Colaborador,(extract(YEAR FROM SYSDATE)-extract(YEAR FROM d.data_nascimento)) IDADE, 
 Case 
     when (extract(YEAR FROM SYSDATE)-extract(YEAR FROM d.data_nascimento)) >= 18 then 'MAIOR DE IDADE'
-    when (extract(YEAR FROM SYSDATE)-extract(YEAR FROM d.data_nascimento))< 18 then 'MENOR DE IDADE'
     else 
-    'x'
+    'MENOR DE IDADE'
     end as IDADE
 from dependente d
 inner join colaborador c on d.colaborador=c.matricula
